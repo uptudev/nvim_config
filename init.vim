@@ -27,9 +27,9 @@ call plug#begin('~/.vim/plugged')
     Plug 'voldikss/vim-floaterm'
 
 call plug#end()
+colorscheme molokai
 
 if exists("g:neovide")
-	colorscheme molokai
 	let g:neovide_scale_factor = 1.0
 	let g:neovide_padding_top = 0
 	let g:neovide_padding_bottom = 0
