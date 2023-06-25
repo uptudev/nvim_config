@@ -7,6 +7,9 @@ vim.g.vimspector_sidebar_width = 85
 vim.g.vimspector_bottombar_height = 15
 vim.g.vimspector_terminal_maxwidth = 70
 
+vim.g.svelte_indent_script = 1
+vim.g.svelte_indent_style = 1
+
 -- Set completeopt to have a better completion experience
 -- :help completeopt
 -- menuone: popup even when there's only one match
@@ -25,8 +28,6 @@ vim.opt.updatetime = 300
 -- Show inlay_hints more frequently 
 vim.opt.signcolumn = 'yes'
 vim.api.nvim_command('autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })')
-
-vim.g.mapleader = '\\'
 
 -- Go to last cursor position when opening a file
 vim.api.nvim_command("autocmd BufReadPost * if line(\"'\\\"\") > 1 && line(\"'\\\"\") <= line(\"$\") | exe 'normal! g`\"' | endif")
@@ -48,6 +49,10 @@ vim.cmd('filetype on')
 vim.cmd('filetype plugin indent on')
 vim.cmd('syntax on')
 
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.expandtab = true
+vim.opt.softtabstop = 4
 vim.opt.linespace = 0
 vim.opt.number = true
 vim.opt.relativenumber = true

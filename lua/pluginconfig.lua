@@ -35,6 +35,10 @@
   use 'lewis6991/gitsigns.nvim'
   use {'akinsho/toggleterm.nvim', tag = '*'}
   use 'DingDean/wgsl.vim'
+  use 'othree/html5.vim'
+  use 'pangloss/vim-javascript'
+  use 'evanleck/vim-svelte'
+  use 'ron-rs/ron.vim'
 end)
 
 local rt = require("rust-tools")
