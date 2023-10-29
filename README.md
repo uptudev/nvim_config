@@ -11,7 +11,7 @@ git clone --depth 1 https://github.com/wbthomason/packer.nvim\
  ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 ```
 
-#### Windows (PowerShell)
+#### Windows (Git Bash)
 
 ```powershell
 git clone https://github.com/wbthomason/packer.nvim "$env:LOCALAPPDATA\nvim-data\site\pack\packer\start\packer.nvim"
@@ -28,7 +28,7 @@ rm -rf ~/.config/nvim && git clone https://github.com/uptudev/nvim_config ~/.con
 #### Windows
 
 ```powershell
-rm $HOME\AppData\Local\nvim && git clone https://github.com/uptudev/nvim_config $HOME\AppData\Local\nvim --depth 1
+rm -rf $HOME/AppData/Local/nvim-data && git clone https://github.com/uptudev/nvim_config $HOME/AppData/Local/nvim-data --depth 1
 ```
 
 Once loaded, run `:PackerInstall`, then `:PackerCompile`.
