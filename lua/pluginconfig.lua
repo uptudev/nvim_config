@@ -75,6 +75,8 @@ require('lualine').setup {
 -- Setup file browser and Telescope for searching
 require('nvim-tree').setup()
 require('telescope').setup()
+
+-- Setup block auto-pairing (doubling of `[]`, `{}`, `()`, `''`, `""`, etc.)
 require('nvim-autopairs').setup()
 
 -- Mason Setup
