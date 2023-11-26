@@ -1,4 +1,5 @@
-  require('packer').startup(function(use)
+-- Github libraries
+require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
   use 'uptudev/molokai.nvim'
   use 'junegunn/seoul256.vim'
@@ -8,6 +9,7 @@
   use 'nvim-lua/plenary.nvim'
   use 'nvim-telescope/telescope.nvim'
   use 'nvim-tree/nvim-tree.lua'
+  use 'nvim-tree/nvim-web-devicons'
   use 'Yggdroot/indentLine'
   use 'tpope/vim-fugitive'
   use 'junegunn/gv.vim'
@@ -31,6 +33,8 @@
   use 'hrsh7th/cmp-path'
   use 'hrsh7th/cmp-buffer'
   use 'hrsh7th/vim-vsnip'
+  use 'L3MON4D3/LuaSnip'
+  use 'rafamadriz/friendly-snippets'
   use 'hrsh7th/cmp-nvim-lsp-signature-help'
   use 'lewis6991/gitsigns.nvim'
   use {'akinsho/toggleterm.nvim', tag = '*'}
@@ -41,6 +45,7 @@
   use 'ron-rs/ron.vim'
 end)
 
+-- Import Rust tooling
 local rt = require("rust-tools")
 
 rt.setup({
@@ -54,16 +59,24 @@ rt.setup({
   },
 })
 
+-- My molokai colour palette for Lualine and nvim
 local molofix = require("molofix")
-
 vim.api.nvim_command("colorscheme molokai")
 
+-- Setup Lualine
 require('lualine').setup {
-    options = { theme = molofix },
+    options = { 
+        theme = molofix,
+        component_separators = {left = '', right = ''},
+        section_separators = {left = '', right = ''},
+    },
 }
+
+-- Setup file browser and Telescope for searching
 require('nvim-tree').setup()
 require('telescope').setup()
 require('nvim-autopairs').setup()
+
 -- Mason Setup
 require('mason').setup({
     ui = {
@@ -75,7 +88,11 @@ require('mason').setup({
     }
 })
 require('mason-lspconfig').setup()
+
+-- Git status symbols
 require('gitsigns').setup()
+
+-- Quake terminal
 require('toggleterm').setup()
 
 return {}

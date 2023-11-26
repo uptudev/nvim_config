@@ -2,8 +2,10 @@
 -- Modified (c) 2023 uptu
 -- MIT license, see LICENSE for more details.
 -- stylua: ignore
+
+-- Colour scheme
 local colors = {
-  black  = '#232526',
+  black  = '#1e1f1c',
   gray   = '#808080',
   white  = '#f8f8f2',
   cyan   = '#66d9ef',
@@ -15,13 +17,14 @@ local colors = {
   brown  = '#dda55f',
 }
 
+-- Lualine theme, each mode designates modifications to the base theme
 local molofix = {
   normal = {
     a = { fg = colors.black, bg = colors.cyan, gui = 'bold' },
     b = { fg = colors.black, bg = colors.pink },
     c = { fg = colors.orange, bg = colors.black },
   },
-  command = {a = { fg = colors.black, bg = colors.brown, gui = 'bold' } },
+  command = { a = { fg = colors.black, bg = colors.brown, gui = 'bold' } },
   insert = { a = { fg = colors.black, bg = colors.green, gui = 'bold' } },
   visual = { a = { fg = colors.black, bg = colors.yellow, gui = 'bold' } },
   replace = { a = { fg = colors.black, bg = colors.red, gui = 'bold' } },
