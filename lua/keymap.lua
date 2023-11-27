@@ -64,3 +64,18 @@ map('n', '<F11>', ":lua if vim.g.neovide_fullscreen then vim.g.neovide_fullscree
 
 -- Erase search highlighting
 map('n', '<leader>e', [[:nohlsearch<CR>:match<CR>:diffupdate<CR>]], {noremap = true, silent = true, nowait = true})
+
+-- Change working directory of nvim-tree; rebinding of `Ctrl+]`
+map('n', '<leader>d', [[<C-]>]], {})
+
+-- Remap `Ctrl-D` & `Ctrl-U` to capital J and K, respectively, then recentre screen. Also remap join to Ctrl-J.
+map('n', '<S-J>', [[<C-d>zz]], {})
+map('n', '<S-K>', [[<C-u>zz]], {})
+map('n', '<C-J>', [[:join<cr>]], {})
+
+-- Keep paste register in visual mode; in normal mode, it dumps the system clipboard.
+map('v', '<leader>p', "\"_dP", {})
+map('n', '<leader>p', "\"+p", {})
+
+-- Yank to system clipboard
+map('n', '<leader>y', "\"+y", {})

@@ -1,16 +1,16 @@
 vim.o.runtimepath = vim.o.runtimepath .. ',' .. '~/.local/share/nvim/site/pack/packer'
 
---Override default config settings
+-- Override default config settings
 require("vimconfig")
 
---Import & setup plugins
+-- Import & setup plugins
 require("pluginconfig")
 
---Setup LSP
+-- Setup LSP
 require("lspsetup")
 
---Setup CMP
+-- Setup CMP
 require("cmpconfig")
 
---Dependent on all plugins to be loaded already; call last
+-- Dependent on all plugins to be loaded already; call last
 require("keymap")
