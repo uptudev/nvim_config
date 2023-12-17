@@ -7,6 +7,22 @@ void ui_busy_stop(void);
 
 -- Because typing `vim.api.nvim_set_keymap` is redundant
 local map = vim.api.nvim_set_keymap
+local non_vcs_ignored = true
+
+function _G.toggle_gitignored()
+    local setup, nvimtree = pcall(require, "nvim-tree")
+    if not setup then
+        return
+    end
+
+    non_vcs_ignored = not non_vcs_ignored
+
+    nvimtree.setup({
+        git = {
+            ignore = non_vcs_ignored,
+        },
+    })
+end
 
 -- Leader key is SPACE
 vim.g.mapleader = ' '
@@ -31,6 +47,9 @@ end
 vim.opt.guicursor = "n-v-c:block-Cursor/lCursor-blinkwait450-blinkon450-blinkoff300,i-ci:ver25-Cursor/lCursor-blinkwait450-blinkon450-blinkoff300,r-cr:hor20-Cursor/lCursor-blinkwait450-blinkon450-blinkoff300"
 
 -- Keymapping
+
+-- Toggle non-VCS file visibility
+map('n', '<leader>g', ":lua toggle_gitignored()<CR>", {noremap = true, silent = true, nowait = true})
 
 -- Toggle cursor row/column highlighting
 map('n', '<leader>h', ":lua ToggleCursorHighlight()<CR>", {noremap = true, silent = true, nowait = true})
