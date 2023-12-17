@@ -38,7 +38,7 @@ if vim.g.neovide then
     vim.g.neovide_padding_bottom = 0
     vim.g.neovide_padding_right = 0
     vim.g.neovide_padding_left = 0
-    vim.g.neovide_transparency = 1.0
+    vim.g.neovide_transparency = 0.9
     vim.g.neovide_hide_mouse_when_typing = true
     vim.g.neovide_refresh_rate = 144
 end

@@ -1,3 +1,22 @@
+local ffi = require("ffi")
+
+ffi.cdef([[
+void ui_busy_start(void);
+void ui_busy_stop(void);
+]])
+
+vim.api.nvim_create_autocmd({"InsertEnter"}, {
+  callback = function()
+    ffi.C.ui_busy_start()
+  end
+})
+
+vim.api.nvim_create_autocmd({"InsertLeave"}, {
+  callback = function()
+    ffi.C.ui_busy_stop()
+  end
+})
+
 -- Because typing `vim.api.nvim_set_keymap` is redundant
 local map = vim.api.nvim_set_keymap
 
@@ -13,6 +32,11 @@ function ToggleCursorHighlight()
     cursor_highlight_enabled = not cursor_highlight_enabled
     vim.opt.cursorline = cursor_highlight_enabled
     vim.opt.cursorcolumn = cursor_highlight_enabled
+    if cursor_highlight_enabled then
+        ffi.C.ui_busy_stop()
+    else 
+        ffi.C.ui_busy_start()
+    end
 end
 
 -- Cursor blinking and default behaviour
