@@ -27,9 +27,10 @@ end
 -- Leader key is SPACE
 vim.g.mapleader = ' '
 
--- Initialize a variable to track the current state
+-- Initialize variables to track the current state
 local cursor_highlight_enabled = true
 local cursor_visible = true
+local show_hex = false
 
 -- Function to toggle cursorline and cursorcolumn
 function ToggleCursorHighlight()
@@ -43,6 +44,16 @@ function ToggleCursorHighlight()
     end
 end
 
+-- Function to toggle hexadecimal representation
+function ToggleHex()
+    show_hex = not show_hex
+    if show_hex then
+        vim.cmd[[:set display=uhex]]
+    else
+        vim.cmd[[:set display=]]
+    end
+end
+
 -- Cursor blinking and default behaviour
 vim.opt.guicursor = "n-v-c:block-Cursor/lCursor-blinkwait450-blinkon450-blinkoff300,i-ci:ver25-Cursor/lCursor-blinkwait450-blinkon450-blinkoff300,r-cr:hor20-Cursor/lCursor-blinkwait450-blinkon450-blinkoff300"
 
@@ -52,7 +63,7 @@ vim.opt.guicursor = "n-v-c:block-Cursor/lCursor-blinkwait450-blinkon450-blinkoff
 map('n', '<leader>g', ":lua toggle_gitignored()<CR>", {noremap = true, silent = true, nowait = true})
 
 -- Toggle cursor row/column highlighting
-map('n', '<leader>h', ":lua ToggleCursorHighlight()<CR>", {noremap = true, silent = true, nowait = true})
+map('n', '<leader>H', ":lua ToggleCursorHighlight()<CR>", {noremap = true, silent = true, nowait = true})
 
 -- Toggle nvim-tree (file browser)
 map('n', '<leader>n', [[:NvimTreeToggle<cr>]], {noremap = true, silent = true, nowait = true})
@@ -64,10 +75,10 @@ map('n', '<leader>l', [[:IndentLinesToggle<cr>]], {noremap = true, silent = true
 map('n', '<leader>f', [[:Telescope find_files<cr>]], {noremap = true, silent = true, nowait = true})
 
 -- Split the editor vertically
-map('n', '<leader>v', [[:vsplit<cr>]], {})
+map('n', '<leader>v', [[:split<cr>]], {})
 
 -- Split the editor horizontally
-map('n', '<leader>s', [[:split<cr>]], {})
+map('n', '<leader>h', [[:vsplit<cr>]], {})
 
 -- Quit
 map('n', '<leader>q', [[:q<cr>]], {})
@@ -110,3 +121,6 @@ map('n', '<leader>p', "\"+p", {})
 
 -- Yank to system clipboard
 map('n', '<leader>y', "\"+y", {})
+
+-- Toggle hex visibility
+map('n', '<leader>X', ":lua ToggleHex()<CR>", {})

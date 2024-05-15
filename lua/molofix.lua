@@ -22,16 +22,16 @@ local molofix = {
   normal = {
     a = { fg = colors.black, bg = colors.cyan, gui = 'bold' },
     b = { fg = colors.black, bg = colors.pink },
-    c = { fg = colors.orange, bg = colors.black },
+    c = { fg = colors.orange, bg = NONE },
   },
   command = { a = { fg = colors.black, bg = colors.brown, gui = 'bold' } },
   insert = { a = { fg = colors.black, bg = colors.green, gui = 'bold' } },
   visual = { a = { fg = colors.black, bg = colors.yellow, gui = 'bold' } },
   replace = { a = { fg = colors.black, bg = colors.red, gui = 'bold' } },
   inactive = {
-    a = { fg = colors.pink, bg = colors.black, gui = 'bold' },
+    a = { fg = colors.pink, bg = NONE, gui = 'bold' },
     b = { fg = colors.white, bg = colors.pink },
-    c = { fg = colors.gray, bg = colors.black },
+    c = { fg = colors.gray, bg = NONE },
   },
 }
 

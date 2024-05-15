@@ -1,9 +1,9 @@
 -- Github libraries
 require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
-  use 'uptudev/molokai.nvim'
   use 'junegunn/seoul256.vim'
   use 'mhinz/vim-startify'
+  use 'uptudev/molokai.nvim'
   use 'nvim-lualine/lualine.nvim'
   use 'nvim-tree/nvim-web-devicons'
   use 'nvim-lua/plenary.nvim'
@@ -20,6 +20,7 @@ require('packer').startup(function(use)
       ts_update()
     end,
   }
+  use 'christoomey/vim-tmux-navigator'
   use 'tpope/vim-commentary'
   use 'williamboman/mason.nvim'
   use 'williamboman/mason-lspconfig.nvim'
@@ -42,6 +43,7 @@ require('packer').startup(function(use)
   use 'pangloss/vim-javascript'
   use 'evanleck/vim-svelte'
   use 'ron-rs/ron.vim'
+  use 'github/copilot.vim'
 end)
 
 -- Import Rust tooling
@@ -60,17 +62,19 @@ rt.setup({
 
 -- My molokai colour palette for Lualine and nvim
 local molofix = require("molofix")
+require("molokai").setup({
+    transparent = true,
+})
 vim.api.nvim_command("colorscheme molokai")
 
 -- Setup Lualine
-require('lualine').setup {
+require('lualine').setup({
     options = { 
         theme = molofix,
         component_separators = {left = '', right = ''},
         section_separators = {left = '', right = ''},
     },
-}
-
+})
 -- Setup file browser and Telescope for searching
 require('nvim-tree').setup()
 require('telescope').setup()
