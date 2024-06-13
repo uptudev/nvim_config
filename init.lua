@@ -14,3 +14,5 @@ require("cmpconfig")
 
 -- Dependent on all plugins to be loaded already; call last
 require("keymap")
+
+vim.cmd [[autocmd VimEnter * :TSEnable highlight]]
