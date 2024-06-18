@@ -2,22 +2,6 @@
 
 This is my Neovim configuration folder (found at `~/.config/nvim`). In order to get this to work, simply follow the below steps:
 
-## Installing Packer
-
-#### Unix/Linux
-
-```sh
-git clone --depth 1 https://github.com/wbthomason/packer.nvim\
- ~/.local/share/nvim/site/pack/packer/start/packer.nvim
-```
-
-#### Windows (Git Bash)
-
-```powershell
-rm -rf $HOME/AppData/Local/nvim-data && git clone https://github.com/wbthomason/packer.nvim "$HOME/AppData/Local/nvim-data/site/pack/packer/start/packer.nvim"
-
-```
-
 ## Installing Config
 
 #### Unix/Linux
@@ -32,6 +16,6 @@ rm -rf ~/.config/nvim && git clone https://github.com/uptudev/nvim_config ~/.con
 git clone https://github.com/uptudev/nvim_config $HOME/AppData/Local/nvim-data --depth 1
 ```
 
-Once loaded, run `:PackerInstall`, then `:PackerCompile`.
+Once loaded, run `:Lazy sync`.
 
 After that, restart Neovim, and you should see your new config!
