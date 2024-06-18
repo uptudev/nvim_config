@@ -103,7 +103,7 @@ cmp.setup({
 
   -- Installed sources:
   sources = {
-    { name = 'neorg' },                     -- from neorg
+    { name = "neorg" },                     -- from neorg
     { name = 'nvim_lsp'},                   -- from language server
     { name = 'nvim_lsp_signature_help'},    -- display function signatures
     { name = 'nvim_lua'},       -- complete neovim's Lua runtime API such vim.lsp.*

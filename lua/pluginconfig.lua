@@ -39,13 +39,18 @@ require('lazy').setup({
   'williamboman/mason-lspconfig.nvim',
   'neovim/nvim-lspconfig',
   'simrat39/rust-tools.nvim',
-  'hrsh7th/nvim-cmp',
+  {
+    "hrsh7th/nvim-cmp",
+    event = "InsertEnter",
+    dependencies = {
+      "hrsh7th/cmp-nvim-lsp",
+      "hrsh7th/cmp-buffer",
+    },
+  },
   'hrsh7th/cmp-nvim-lsp',
   'hrsh7th/cmp-nvim-lua',
-  'hrsh7th/cmp-vsnip',
   'hrsh7th/cmp-path',
   'hrsh7th/cmp-buffer',
-  'hrsh7th/vim-vsnip',
   'L3MON4D3/LuaSnip',
   'rafamadriz/friendly-snippets',
   'hrsh7th/cmp-nvim-lsp-signature-help',
@@ -65,9 +70,28 @@ require('lazy').setup({
   {
     "nvim-neorg/neorg",
     dependencies = { "luarocks.nvim" },
-    lazy = false,
+    ft = "norg",
     version = "*",
-    config = true,
+    config = function()
+      require("neorg").setup({
+        load = {
+          ["core.defaults"] = {},
+          ["core.completion"] = {
+            config = {
+              engine = "nvim-cmp",
+            },
+          },
+          ["core.concealer"] = {},
+          ["core.dirman"] = {
+            config = {
+              workspaces = {
+                my_workspace = "~/neorg",
+              },
+            },
+          },
+        },
+      })
+    end,
   },
 })
 
@@ -129,13 +153,6 @@ require('nvim-treesitter.configs').setup({
   highlight = {
     enable = true,
   },
-})
-
-require('neorg').setup({
-  load = {
-    ["core.defaults"] = {},
-    ["core.completion"] = {engine = 'nvim-cmp', name = 'neorg'},
-  }
 })
 
 return {}
