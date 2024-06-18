@@ -57,6 +57,18 @@ require('lazy').setup({
   'evanleck/vim-svelte',
   'ron-rs/ron.vim',
   'github/copilot.vim',
+  {
+    "vhyrro/luarocks.nvim",
+    priority = 1000, -- We'd like this plugin to load first out of the rest
+    config = true, -- This automatically runs `require("luarocks-nvim").setup()`
+  },
+  {
+    "nvim-neorg/neorg",
+    dependencies = { "luarocks.nvim" },
+    lazy = false,
+    version = "*",
+    config = true,
+  },
 })
 
 -- Import Rust tooling
@@ -97,13 +109,13 @@ require('nvim-autopairs').setup()
 
 -- Mason Setup
 require('mason').setup({
-    ui = {
-        icons = {
-            package_installed = "",
-            package_pending = "",
-            package_uninstalled = "",
-        },
-    }
+  ui = {
+    icons = {
+      package_installed = "",
+      package_pending = "",
+      package_uninstalled = "",
+    },
+  }
 })
 require('mason-lspconfig').setup()
 
@@ -112,5 +124,11 @@ require('gitsigns').setup()
 
 -- Quake terminal
 require('toggleterm').setup()
+
+require('nvim-treesitter.configs').setup({
+  highlight = {
+    enable = true,
+  },
+})
 
 return {}
