@@ -131,4 +131,11 @@ require('nvim-treesitter.configs').setup({
   },
 })
 
+require('neorg').setup({
+  load = {
+    ["core.defaults"] = {},
+    ["core.completion"] = {engine = 'nvim-cmp', name = 'neorg'},
+  }
+})
+
 return {}
