@@ -68,3 +68,10 @@ vim.opt.showmatch = true
 vim.opt.smartcase = true
 vim.opt.clipboard = 'unnamed'
 vim.opt.splitright = true
+vim.opt.conceallevel = 2
+
+-- nvim-ufo settings
+vim.o.foldcolumn = '1'
+vim.o.foldlevel = 99
+vim.o.foldlevelstart = 99
+vim.o.foldenable = true

@@ -27,6 +27,12 @@ require('lazy').setup({
   'junegunn/gv.vim',
   'windwp/nvim-autopairs',
   {
+    'kevinhwang91/nvim-ufo',
+    dependencies = {
+      'kevinhwang91/promise-async',
+    },
+  },
+  {
     'nvim-treesitter/nvim-treesitter',
     build = function()
       local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
@@ -61,7 +67,7 @@ require('lazy').setup({
   'pangloss/vim-javascript',
   'evanleck/vim-svelte',
   'ron-rs/ron.vim',
-  'github/copilot.vim',
+  -- 'github/copilot.vim',
   {
     "vhyrro/luarocks.nvim",
     priority = 1000, -- We'd like this plugin to load first out of the rest
@@ -81,17 +87,75 @@ require('lazy').setup({
               engine = "nvim-cmp",
             },
           },
-          ["core.concealer"] = {},
+          ["core.concealer"] = {
+            config = {
+              icon_preset = "diamond",
+            },
+          },
           ["core.dirman"] = {
             config = {
               workspaces = {
-                my_workspace = "~/neorg",
+                my_notes = "~/notes",
               },
+              index = "index.norg",
             },
           },
         },
       })
     end,
+  },
+  {
+    "willothy/nvim-cokeline",
+    dependencies = {
+        "nvim-lua/plenary.nvim",
+        "nvim-tree/nvim-web-devicons",
+    },
+    config = function()
+      local get_hex = require('cokeline.hlgroups').get_hl_attr
+
+      local green = vim.g.terminal_color_2
+      local yellow = vim.g.terminal_color_3
+      require('cokeline').setup({
+        default_hl = {
+          fg = function(buffer)
+            return
+              buffer.is_focused
+              and get_hex('Normal', 'fg')
+               or get_hex('Comment', 'fg')
+          end,
+          bg = get_hex('ColorColumn', 'bg'),
+        },
+
+        components = {
+          {
+            text = '｜',
+            fg = function(buffer)
+              return
+                buffer.is_modified and yellow or green
+            end
+          },
+          {
+            text = function(buffer) return buffer.devicon.icon .. ' ' end,
+            fg = function(buffer) return buffer.devicon.color end,
+          },
+          {
+            text = function(buffer) return buffer.index .. ': ' end,
+          },
+          {
+            text = function(buffer) return buffer.unique_prefix end,
+            fg = get_hex('Comment', 'fg'),
+            italic = true,
+          },
+          {
+            text = function(buffer) return buffer.filename .. ' ' end,
+            bold = function(buffer) return buffer.is_focused end,
+          },
+          {
+            text = ' ',
+          },
+        },
+      })
+    end
   },
 })
 
@@ -112,17 +176,17 @@ rt.setup({
 -- My molokai colour palette for Lualine and nvim
 local molofix = require("molofix")
 require("molokai").setup({
-    transparent = true,
+  transparent = true,
 })
 vim.api.nvim_command("colorscheme molokai")
 
 -- Setup Lualine
 require('lualine').setup({
-    options = { 
-        theme = molofix,
-        component_separators = {left = '', right = ''},
-        section_separators = {left = '', right = ''},
-    },
+  options = { 
+    theme = molofix,
+    component_separators = {left = '', right = ''},
+    section_separators = {left = '', right = ''},
+  },
 })
 -- Setup file browser and Telescope for searching
 require('nvim-tree').setup()
@@ -153,6 +217,12 @@ require('nvim-treesitter.configs').setup({
   highlight = {
     enable = true,
   },
+})
+
+require('ufo').setup({
+  provider_selector = function(bufnr, filetype, buftype)
+    return {'treesitter', 'indent'}
+  end
 })
 
 return {}
