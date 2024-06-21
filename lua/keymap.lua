@@ -142,4 +142,4 @@ for i = 1, 9 do
 end
 
 -- close buffers
-map('n', '<leader>0', "<Plug>(cokeline-pick-close)", { silent = true })
+map('n', '<leader>`', "<Plug>(cokeline-pick-close)", { silent = true })
