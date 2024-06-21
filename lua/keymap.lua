@@ -98,9 +98,6 @@ map('n', '<leader>t', [[:!touch ]], {})
 -- Reload the configs from the base file (useful when tweaking configs)
 map('n', '<leader>o', [[:so ~/.config/nvim/init.lua<cr>]], {noremap = true, silent = true, nowait = true})
 
--- Toggle Quake terminal visibility
-map('n', '`', [[:ToggleTerm<cr>]], {noremap = true, silent = true, nowait = true})
-
 -- Toggle fullscreen
 map('n', '<F11>', ":lua if vim.g.neovide_fullscreen then vim.g.neovide_fullscreen = false else vim.g.neovide_fullscreen = true end <cr>", {noremap = true, silent = true, nowait = true})
 
@@ -110,10 +107,10 @@ map('n', '<leader>e', [[:nohlsearch<CR>:match<CR>:diffupdate<CR>]], {noremap = t
 -- Change working directory of nvim-tree; rebinding of `Ctrl+]`
 map('n', '<leader>d', [[<C-]>]], {})
 
--- Remap `Ctrl-D` & `Ctrl-U` to capital J and K, respectively, then recentre screen. Also remap join to Ctrl-J.
+-- Remap `Ctrl-D` & `Ctrl-U` to capital J and K, respectively, then recentre screen. Also remap join to Alt-J.
 map('n', '<S-J>', [[<C-d>zz]], {})
 map('n', '<S-K>', [[<C-u>zz]], {})
-map('n', '<C-J>', [[:join<cr>]], {})
+map('n', '<M-J>', [[:join<cr>]], {})
 
 -- Keep paste register in visual mode; in normal mode, it dumps the system clipboard.
 map('v', '<leader>p', "\"_dP", {})
@@ -143,3 +140,6 @@ for i = 1, 9 do
     map('n', ("<F%s>"):format(i), ("<Plug>(cokeline-switch-%s)"):format(i), { silent = true })
     map('n', ("<leader>%s"):format(i), ("<Plug>(cokeline-focus-%s)"):format(i), { silent = true })
 end
+
+-- close buffers
+map('n', '<leader>0', "<Plug>(cokeline-pick-close)", { silent = true })

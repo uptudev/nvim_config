@@ -61,13 +61,12 @@ require('lazy').setup({
   'rafamadriz/friendly-snippets',
   'hrsh7th/cmp-nvim-lsp-signature-help',
   'lewis6991/gitsigns.nvim',
-  {'akinsho/toggleterm.nvim', version = '*'},
   'DingDean/wgsl.vim',
   'othree/html5.vim',
   'pangloss/vim-javascript',
   'evanleck/vim-svelte',
   'ron-rs/ron.vim',
-  -- 'github/copilot.vim',
+  'github/copilot.vim',
   {
     "vhyrro/luarocks.nvim",
     priority = 1000, -- We'd like this plugin to load first out of the rest
@@ -209,9 +208,6 @@ require('mason-lspconfig').setup()
 
 -- Git status symbols
 require('gitsigns').setup()
-
--- Quake terminal
-require('toggleterm').setup()
 
 require('nvim-treesitter.configs').setup({
   highlight = {
