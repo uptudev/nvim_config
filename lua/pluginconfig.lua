@@ -135,6 +135,27 @@ require('lazy').setup({
     },
   },
   'hrsh7th/cmp-nvim-lsp',
+  {
+    'mfussenegger/nvim-lint',
+    config = function()
+      require('lint').linters_by_ft = {
+        rust = {"bacon"},
+        lua = {'luacheck'},
+        javascript = {'eslint'},
+        typescript = {'eslint'},
+        typescriptreact = {'eslint'},
+        html = {'tidy'},
+        css = {'stylelint'},
+        scss = {'stylelint'},
+        sass = {'stylelint'},
+        less = {'stylelint'},
+        json = {'jsonlint'},
+        yaml = {'yamllint'},
+        markdown = {'vale'},
+        sh = {'shellcheck'},
+      }
+    end
+  },
   'hrsh7th/cmp-nvim-lua',
   'hrsh7th/cmp-path',
   'hrsh7th/cmp-buffer',

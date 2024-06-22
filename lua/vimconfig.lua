@@ -32,6 +32,16 @@ vim.api.nvim_command('autocmd CursorHold * lua vim.diagnostic.open_float(nil, { 
 -- Go to last cursor position when opening a file
 vim.api.nvim_command("autocmd BufReadPost * if line(\"'\\\"\") > 1 && line(\"'\\\"\") <= line(\"$\") | exe 'normal! g`\"' | endif")
 
+-- Lint on BufWritePost
+vim.api.nvim_create_autocmd({ "InsertLeave", "BufWritePost" }, {
+  callback = function()
+    local lint_status, lint = pcall(require, "lint")
+    if lint_status then
+      lint.try_lint()
+    end
+  end,
+})
+
 if vim.g.neovide then
     vim.g.neovide_scale_factor = 1.0
     vim.g.neovide_padding_top = 0
