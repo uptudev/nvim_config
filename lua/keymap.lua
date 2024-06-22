@@ -129,17 +129,3 @@ map('n', 'zM', ":lua require('ufo').closeAllFolds()<CR>", {noremap = true, silen
 -- toggle treesitter highlighting (with a neorg toggle-concealer call)
 map('n', '<leader>c', [[:TSToggle highlight<CR>]], {noremap = true, silent = true, nowait = true})
 map('n', '<leader>C', [[:Neorg toggle-concealer<CR>]], {noremap = true, silent = true, nowait = true})
-
--- buffer switching
-map('n', '<leader>P', "<Plug>(cokeline-switch-prev)", { silent = true })
-map('n', '<leader>N', "<Plug>(cokeline-switch-next)", { silent = true })
-map('n', '<C-Tab>', "<Plug>(cokeline-focus-prev)", { silent = true })
-map('n', '<M-Tab>', "<Plug>(cokeline-focus-next)", { silent = true })
-
-for i = 1, 9 do
-    map('n', ("<F%s>"):format(i), ("<Plug>(cokeline-switch-%s)"):format(i), { silent = true })
-    map('n', ("<leader>%s"):format(i), ("<Plug>(cokeline-focus-%s)"):format(i), { silent = true })
-end
-
--- close buffers
-map('n', '<leader>`', "<Plug>(cokeline-pick-close)", { silent = true })

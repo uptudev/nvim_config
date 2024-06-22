@@ -1,3 +1,4 @@
+-- Lazy.nvim setup
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
   vim.fn.system({
@@ -11,26 +12,67 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- Github libraries
+-- Packages
 require('lazy').setup({
   'wbthomason/packer.nvim',
   'junegunn/seoul256.vim',
   'mhinz/vim-startify',
   'uptudev/molokai.nvim',
-  'nvim-lualine/lualine.nvim',
+  {
+    'nvim-lualine/lualine.nvim',
+    dependencies = {
+      'uptudev/molokai.nvim',
+    },
+    config = function()
+      local molofix = require("molofix")
+      require("molokai").setup({
+        transparent = true,
+      })
+      vim.api.nvim_command("colorscheme molokai")
+      require('lualine').setup({
+        options = { 
+          theme = molofix,
+          component_separators = {left = '', right = ''},
+          section_separators = {left = '', right = ''},
+        },
+      })
+    end
+  },
   'nvim-tree/nvim-web-devicons',
   'nvim-lua/plenary.nvim',
-  'nvim-telescope/telescope.nvim',
-  'nvim-tree/nvim-tree.lua',
+  {
+    'nvim-telescope/telescope.nvim',
+    config = function()
+      require('telescope').setup()
+    end
+  },
+  {
+    'nvim-tree/nvim-tree.lua',
+    config = function()
+      require('nvim-tree').setup()
+    end
+  },
   'Yggdroot/indentLine',
   'tpope/vim-fugitive',
   'junegunn/gv.vim',
-  'windwp/nvim-autopairs',
+  {
+    'windwp/nvim-autopairs',
+    config = function()
+      require('nvim-autopairs').setup()
+    end
+  },
   {
     'kevinhwang91/nvim-ufo',
     dependencies = {
       'kevinhwang91/promise-async',
     },
+    config = function()
+      require('ufo').setup({
+        provider_selector = function(bufnr, filetype, buftype)
+          return {'treesitter', 'indent'}
+        end
+      })
+    end
   },
   {
     'nvim-treesitter/nvim-treesitter',
@@ -38,13 +80,52 @@ require('lazy').setup({
       local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
       ts_update()
     end,
+    config = function()
+      require('nvim-treesitter.configs').setup({
+        highlight = {
+          enable = true,
+        },
+      })
+    end
   },
   'christoomey/vim-tmux-navigator',
   'tpope/vim-commentary',
-  'williamboman/mason.nvim',
-  'williamboman/mason-lspconfig.nvim',
+  {
+      'williamboman/mason.nvim',
+      config = function()
+        require('mason').setup({
+          ui = {
+            icons = {
+              package_installed = "",
+              package_pending = "",
+              package_uninstalled = "",
+            },
+          }
+        })
+      end,
+  },
+  {
+    'williamboman/mason-lspconfig.nvim',
+    config = function()
+      require('mason-lspconfig').setup()
+    end,
+  },
   'neovim/nvim-lspconfig',
-  'simrat39/rust-tools.nvim',
+  {
+    'simrat39/rust-tools.nvim',
+    config = function()
+        require('rust-tools').setup({
+          server = {
+            on_attach = function(_, bufnr)
+              -- Hover actions
+              vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { buffer = bufnr })
+              -- Code action groups
+              vim.keymap.set("n", "<Leader>a", rt.code_action_group.code_action_group, { buffer = bufnr })
+            end,
+          },
+        })
+    end,
+  },
   {
     "hrsh7th/nvim-cmp",
     event = "InsertEnter",
@@ -60,7 +141,12 @@ require('lazy').setup({
   'L3MON4D3/LuaSnip',
   'rafamadriz/friendly-snippets',
   'hrsh7th/cmp-nvim-lsp-signature-help',
-  'lewis6991/gitsigns.nvim',
+  {
+      'lewis6991/gitsigns.nvim',
+      config = function()
+        require('gitsigns').setup()
+      end,
+  },
   'DingDean/wgsl.vim',
   'othree/html5.vim',
   'pangloss/vim-javascript',
@@ -104,121 +190,13 @@ require('lazy').setup({
     end,
   },
   {
-    "willothy/nvim-cokeline",
-    dependencies = {
-        "nvim-lua/plenary.nvim",
-        "nvim-tree/nvim-web-devicons",
-    },
-    config = function()
-      local get_hex = require('cokeline.hlgroups').get_hl_attr
-
-      local green = vim.g.terminal_color_2
-      local yellow = vim.g.terminal_color_3
-      require('cokeline').setup({
-        default_hl = {
-          fg = function(buffer)
-            return
-              buffer.is_focused
-              and get_hex('Normal', 'fg')
-               or get_hex('Comment', 'fg')
-          end,
-          bg = get_hex('ColorColumn', 'bg'),
-        },
-
-        components = {
-          {
-            text = '｜',
-            fg = function(buffer)
-              return
-                buffer.is_modified and yellow or green
-            end
-          },
-          {
-            text = function(buffer) return buffer.devicon.icon .. ' ' end,
-            fg = function(buffer) return buffer.devicon.color end,
-          },
-          {
-            text = function(buffer) return buffer.index .. ': ' end,
-          },
-          {
-            text = function(buffer) return buffer.unique_prefix end,
-            fg = get_hex('Comment', 'fg'),
-            italic = true,
-          },
-          {
-            text = function(buffer) return buffer.filename .. ' ' end,
-            bold = function(buffer) return buffer.is_focused end,
-          },
-          {
-            text = ' ',
-          },
-        },
-      })
-    end
-  },
-})
-
--- Import Rust tooling
-local rt = require("rust-tools")
-
-rt.setup({
-  server = {
-    on_attach = function(_, bufnr)
-      -- Hover actions
-      vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { buffer = bufnr })
-      -- Code action groups
-      vim.keymap.set("n", "<Leader>a", rt.code_action_group.code_action_group, { buffer = bufnr })
+    'akinsho/bufferline.nvim', 
+    version = "*", 
+    dependencies = 'nvim-tree/nvim-web-devicons',
+    config = function() 
+      require("bufferline").setup({}) 
     end,
   },
-})
-
--- My molokai colour palette for Lualine and nvim
-local molofix = require("molofix")
-require("molokai").setup({
-  transparent = true,
-})
-vim.api.nvim_command("colorscheme molokai")
-
--- Setup Lualine
-require('lualine').setup({
-  options = { 
-    theme = molofix,
-    component_separators = {left = '', right = ''},
-    section_separators = {left = '', right = ''},
-  },
-})
--- Setup file browser and Telescope for searching
-require('nvim-tree').setup()
-require('telescope').setup()
-
--- Setup block auto-pairing (doubling of `[]`, `{}`, `()`, `''`, `""`, etc.)
-require('nvim-autopairs').setup()
-
--- Mason Setup
-require('mason').setup({
-  ui = {
-    icons = {
-      package_installed = "",
-      package_pending = "",
-      package_uninstalled = "",
-    },
-  }
-})
-require('mason-lspconfig').setup()
-
--- Git status symbols
-require('gitsigns').setup()
-
-require('nvim-treesitter.configs').setup({
-  highlight = {
-    enable = true,
-  },
-})
-
-require('ufo').setup({
-  provider_selector = function(bufnr, filetype, buftype)
-    return {'treesitter', 'indent'}
-  end
 })
 
 return {}
