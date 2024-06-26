@@ -108,13 +108,25 @@ require('lazy').setup({
     'williamboman/mason-lspconfig.nvim',
     config = function()
       require('mason-lspconfig').setup()
+      require('lspconfig').rust_analyzer.setup({
+        settings = {
+          ["rust-analyzer"] = {
+            diagnostics = {
+              enable = true,
+              disabled = {"unresolved-proc-macro"},
+              enableExperimental = true,
+            },
+          }
+        }
+      })
     end,
   },
   'neovim/nvim-lspconfig',
   {
     'simrat39/rust-tools.nvim',
     config = function()
-        require('rust-tools').setup({
+        local rt = require('rust-tools')
+        rt.setup({
           server = {
             on_attach = function(_, bufnr)
               -- Hover actions
@@ -139,11 +151,12 @@ require('lazy').setup({
     'mfussenegger/nvim-lint',
     config = function()
       require('lint').linters_by_ft = {
-        rust = {"bacon"},
+        c = {'cpplint'},
+        cpp = {'cpplint'},
         lua = {'luacheck'},
-        javascript = {'eslint'},
-        typescript = {'eslint'},
-        typescriptreact = {'eslint'},
+        javascript = {'eslint_d'},
+        typescript = {'eslint_d'},
+        typescriptreact = {'eslint_d'},
         html = {'tidy'},
         css = {'stylelint'},
         scss = {'stylelint'},
@@ -202,6 +215,7 @@ require('lazy').setup({
             config = {
               workspaces = {
                 my_notes = "~/notes",
+                dev = "~/dev/notes",
               },
               index = "index.norg",
             },
@@ -211,11 +225,11 @@ require('lazy').setup({
     end,
   },
   {
-    'akinsho/bufferline.nvim', 
-    version = "*", 
+    'akinsho/bufferline.nvim',
+    version = "*",
     dependencies = 'nvim-tree/nvim-web-devicons',
-    config = function() 
-      require("bufferline").setup({}) 
+    config = function()
+      require("bufferline").setup({})
     end,
   },
 })
