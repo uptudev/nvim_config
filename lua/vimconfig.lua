@@ -42,6 +42,12 @@ vim.api.nvim_create_autocmd({ "InsertLeave", "BufWritePost" }, {
   end,
 })
 
+vim.filetype.add({
+    pattern = {
+        ['.*%.blade%.php'] = 'blade',
+    },
+})
+
 if vim.g.neovide then
     vim.g.neovide_scale_factor = 1.0
     vim.g.neovide_padding_top = 0

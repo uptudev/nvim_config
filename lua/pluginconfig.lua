@@ -81,6 +81,15 @@ require('lazy').setup({
       ts_update()
     end,
     config = function()
+      local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
+      parser_config.blade = {
+        install_info = {
+          url = "https://github.com/EmranMR/tree-sitter-blade",
+          files = {"src/parser.c"},
+          branch = "main",
+        },
+        filetype = "blade"
+      }
       require('nvim-treesitter.configs').setup({
         highlight = {
           enable = true,
@@ -117,7 +126,7 @@ require('lazy').setup({
               enableExperimental = true,
             },
           }
-        }
+        },
       })
     end,
   },
@@ -149,6 +158,7 @@ require('lazy').setup({
   'hrsh7th/cmp-nvim-lsp',
   {
     'mfussenegger/nvim-lint',
+    dependencies = 'williamboman/mason.nvim',
     config = function()
       require('lint').linters_by_ft = {
         c = {'cpplint'},
@@ -157,17 +167,29 @@ require('lazy').setup({
         javascript = {'eslint_d'},
         typescript = {'eslint_d'},
         typescriptreact = {'eslint_d'},
-        html = {'tidy'},
         css = {'stylelint'},
         scss = {'stylelint'},
         sass = {'stylelint'},
         less = {'stylelint'},
         json = {'jsonlint'},
         yaml = {'yamllint'},
-        markdown = {'vale'},
+        markdown = {'markdownlint', 'vale'},
         sh = {'shellcheck'},
+        php = {'phpstan'},
       }
     end
+  },
+  {
+      'rshkarin/mason-nvim-lint',
+      dependencies = {
+          'williamboman/mason.nvim',
+          'mfussenegger/nvim-lint',
+      },
+      config = function()
+          require("mason-nvim-lint").setup({
+              ensure_installed = {'bacon', 'htmlhint', 'eslint_d'},
+          })
+      end
   },
   'hrsh7th/cmp-nvim-lua',
   'hrsh7th/cmp-path',
@@ -216,6 +238,8 @@ require('lazy').setup({
               workspaces = {
                 my_notes = "~/notes",
                 dev = "~/dev/notes",
+                tenebrae = "~/dev/tenebrae/notes",
+                cubes = "~/Documents/cubes",
               },
               index = "index.norg",
             },
