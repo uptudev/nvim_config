@@ -240,6 +240,7 @@ require('lazy').setup({
                 dev = "~/dev/notes",
                 tenebrae = "~/dev/tenebrae/notes",
                 cubes = "~/Documents/cubes",
+                peppers = "~/Documents/peppers",
               },
               index = "index.norg",
             },
