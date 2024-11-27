@@ -30,7 +30,6 @@ vim.g.mapleader = ' '
 -- Initialize variables to track the current state
 local cursor_highlight_enabled = true
 local cursor_visible = true
-local show_hex = false
 
 -- Function to toggle cursorline and cursorcolumn
 function ToggleCursorHighlight()
@@ -41,16 +40,6 @@ function ToggleCursorHighlight()
         ffi.C.ui_busy_stop()
     else 
         ffi.C.ui_busy_start()
-    end
-end
-
--- Function to toggle hexadecimal representation
-function ToggleHex()
-    show_hex = not show_hex
-    if show_hex then
-        vim.cmd[[:set display=uhex]]
-    else
-        vim.cmd[[:set display=]]
     end
 end
 
@@ -120,7 +109,7 @@ map('n', '<leader>p', "\"+p", {})
 map('n', '<leader>y', "\"+y", {})
 
 -- Toggle hex visibility
-map('n', '<leader>X', ":lua ToggleHex()<CR>", {})
+map('n', '<leader>X', ":HexToggle<CR>", {})
 
 -- ufo maps
 map('n', 'zR', ":lua require('ufo').openAllFolds()<CR>", {noremap = true, silent = true})
