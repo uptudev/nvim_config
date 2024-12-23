@@ -214,7 +214,6 @@ require('lazy').setup({
     'pangloss/vim-javascript',
     'evanleck/vim-svelte',
     'ron-rs/ron.vim',
-    'github/copilot.vim',
     {
         "vhyrro/luarocks.nvim",
         priority = 1000, -- We'd like this plugin to load first out of the rest
