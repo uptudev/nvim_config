@@ -246,6 +246,7 @@ require('lazy').setup({
                                 tenebrae = "~/dev/tenebrae/notes",
                                 cubes = "~/Documents/cubes",
                                 peppers = "~/Documents/peppers",
+                                hexclad = "~/dev/hexclad/notes",
                             },
                             index = "index.norg",
                         },
