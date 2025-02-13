@@ -120,3 +120,4 @@ map('n', '<leader>c', [[:TSToggle highlight<CR>]], {noremap = true, silent = tru
 map('n', '<leader>C', [[:Neorg toggle-concealer<CR>]], {noremap = true, silent = true, nowait = true})
 
 map('n', '<leader>e', [[:BufferLinePick<CR>]], { noremap = true, silent = true })
+map('n', '<leader>E', [[:BufferLinePickClose<CR>]], { noremap = true, silent = true })
