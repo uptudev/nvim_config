@@ -91,7 +91,7 @@ map('n', '<leader>o', [[:so ~/.config/nvim/init.lua<cr>]], {noremap = true, sile
 map('n', '<F11>', ":lua if vim.g.neovide_fullscreen then vim.g.neovide_fullscreen = false else vim.g.neovide_fullscreen = true end <cr>", {noremap = true, silent = true, nowait = true})
 
 -- Erase search highlighting
-map('n', '<leader>e', [[:nohlsearch<CR>:match<CR>:diffupdate<CR>]], {noremap = true, silent = true, nowait = true})
+map('n', '<leader>r', [[:nohlsearch<CR>:match<CR>:diffupdate<CR>]], {noremap = true, silent = true, nowait = true})
 
 -- Change working directory of nvim-tree; rebinding of `Ctrl+]`
 map('n', '<leader>d', [[<C-]>]], {})
