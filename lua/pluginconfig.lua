@@ -175,7 +175,6 @@ require('lazy').setup({
                 yaml = {'yamllint'},
                 markdown = {'markdownlint', 'vale'},
                 sh = {'shellcheck'},
-                php = {'phpstan'},
             }
         end
     },
@@ -187,7 +186,7 @@ require('lazy').setup({
         },
         config = function()
             require("mason-nvim-lint").setup({
-                ensure_installed = {'bacon', 'htmlhint', 'eslint_d'},
+                ensure_installed = {'htmlhint', 'eslint_d'},
             })
         end
     },
@@ -247,6 +246,8 @@ require('lazy').setup({
                                 cubes = "~/Documents/cubes",
                                 peppers = "~/Documents/peppers",
                                 hexclad = "~/dev/hexclad/notes",
+                                recipe_site = "~/dev/recipe_site/notes",
+                                recipes = "~/Documents/recipes",
                             },
                             index = "index.norg",
                         },
