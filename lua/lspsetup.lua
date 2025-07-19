@@ -10,27 +10,21 @@ local sign = function(opts)
 end
 
 -- Icons for different LSP notification classes
-sign({name = 'DiagnosticSignError', text = ''})
-sign({name = 'DiagnosticSignWarn', text = ''})
-sign({name = 'DiagnosticSignHint', text = ''})
+sign({name = 'DiagnosticSignError', text = ''})
+sign({name = 'DiagnosticSignWarn', text = ''})
+sign({name = 'DiagnosticSignHint', text = ''})
 sign({name = 'DiagnosticSignInfo', text = ''})
 
 -- Diagnostic config
 vim.diagnostic.config({
   virtual_text = false,
   signs = true,
-  update_in_insert = true,
+  update_in_insert = false,
   underline = true,
-  severity_sort = false,
-  float = {
-      border = 'rounded',
-      source = 'always',
-      header = '',
-      prefix = '',
-  },
+  severity_sort = true,
+  virtual_lines = { current_line = true },
 })
 
 vim.cmd([[
 set signcolumn=yes
-autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
 ]])

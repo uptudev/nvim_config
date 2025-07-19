@@ -43,6 +43,18 @@ function ToggleCursorHighlight()
     end
 end
 
+function DiagnosticExpand()
+    vim.diagnostic.config({ virtual_lines = { current_line = true }, virtual_text = false })
+
+    vim.api.nvim_create_autocmd('CursorMoved', {
+        group = vim.api.nvim_create_augroup('line-diagnostics', { clear = true }),
+        callback = function()
+            vim.diagnostic.config({ virtual_lines = false, virtual_text = true })
+            return true
+        end,
+    })
+end
+
 -- Cursor blinking and default behaviour
 vim.opt.guicursor = "n-v-c:block-Cursor/lCursor-blinkwait450-blinkon450-blinkoff300,i-ci:ver25-Cursor/lCursor-blinkwait450-blinkon450-blinkoff300,r-cr:hor20-Cursor/lCursor-blinkwait450-blinkon450-blinkoff300"
 
@@ -121,3 +133,4 @@ map('n', '<leader>C', [[:Neorg toggle-concealer<CR>]], {noremap = true, silent =
 
 map('n', '<leader>e', [[:BufferLinePick<CR>]], { noremap = true, silent = true })
 map('n', '<leader>E', [[:BufferLinePickClose<CR>]], { noremap = true, silent = true })
+map('n', '<leader>k', ":lua DiagnosticExpand()<CR>", { noremap = true, silent = true })

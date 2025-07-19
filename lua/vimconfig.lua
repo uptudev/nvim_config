@@ -27,7 +27,6 @@ vim.opt.updatetime = 300
 -- Goto previous / next diagnostic warning / error 
 -- Show inlay_hints more frequently 
 vim.opt.signcolumn = 'yes'
-vim.api.nvim_command('autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })')
 
 -- Go to last cursor position when opening a file
 vim.api.nvim_command("autocmd BufReadPost * if line(\"'\\\"\") > 1 && line(\"'\\\"\") <= line(\"$\") | exe 'normal! g`\"' | endif")
