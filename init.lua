@@ -81,6 +81,7 @@ vim.keymap.set('n', '<leader>E', ':BufferLinePickClose<CR>', { silent = true })
 
 -- Plugins
 vim.pack.add({
+    "https://github.com/mason-org/mason.nvim",
     "https://github.com/uptudev/molokai.nvim",
     "https://github.com/neovim/nvim-lspconfig",
     "https://github.com/mhinz/vim-startify",
@@ -103,6 +104,7 @@ vim.pack.add({
 })
 
 -- Plugin Setup
+require('mason').setup()
 require('molokai').setup({ transparent = true })
 require('lualine').setup({
     options = {
