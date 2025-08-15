@@ -63,12 +63,12 @@ vim.keymap.set('n', '<leader>o', ':update<CR> :source<CR>')
 vim.keymap.set('n', '<leader>w', ':write<CR>')
 vim.keymap.set('n', '<leader>q', ':quit<CR>')
 vim.keymap.set('n', '<leader>lf', vim.lsp.buf.format)
-vim.keymap.set('n', '<leader>r', ':noh<CR>')
-vim.keymap.set('n', '<leader>n', ':NvimTreeToggle<CR>')
-vim.keymap.set('n', '<leader>ff', ':Telescope find_files<CR>')
-vim.keymap.set('n', '<leader>fg', ':Telescope live_grep<CR>')
-vim.keymap.set('n', '<leader>fb', ':Telescope buffers<CR>')
-vim.keymap.set('n', '<leader>fh', ':Telescope help_tags<CR>')
+vim.keymap.set('n', '<leader>r', ':noh<CR>', { silent = true })
+vim.keymap.set('n', '<leader>n', ':NvimTreeToggle<CR>', { silent = true })
+vim.keymap.set('n', '<leader>ff', ':Telescope find_files<CR>', { silent = true })
+vim.keymap.set('n', '<leader>fg', ':Telescope live_grep<CR>', { silent = true })
+vim.keymap.set('n', '<leader>fb', ':Telescope buffers<CR>', { silent = true })
+vim.keymap.set('n', '<leader>fh', ':Telescope help_tags<CR>', { silent = true })
 vim.keymap.set('n', '<S-J>', '<C-d>zz')
 vim.keymap.set('n', '<S-K>', '<C-u>zz')
 vim.keymap.set('n', '<M-J>', ':join<CR>')
@@ -76,8 +76,8 @@ vim.keymap.set('v', '<leader>p', "\"_dP")
 vim.keymap.set('n', '<leader>p', "\"+p")
 vim.keymap.set({ 'n', 'v', 'x' }, '<leader>y', "\"+y")
 vim.keymap.set({ 'n', 'v', 'x' }, '<leader>d', "\"+d")
-vim.keymap.set('n', '<leader>e', ':BufferLinePick<CR>')
-vim.keymap.set('n', '<leader>E', ':BufferLinePickClose<CR>')
+vim.keymap.set('n', '<leader>e', ':BufferLinePick<CR>', { silent = true })
+vim.keymap.set('n', '<leader>E', ':BufferLinePickClose<CR>', { silent = true })
 
 -- Plugins
 vim.pack.add({
@@ -98,6 +98,7 @@ vim.pack.add({
     "https://github.com/tpope/vim-commentary",
     "https://github.com/windwp/nvim-autopairs",
     "https://github.com/christoomey/vim-tmux-navigator",
+    "https://github.com/nvim-telescope/telescope-fzf-native.nvim",
     { src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "master" },
 })
 
@@ -150,6 +151,7 @@ require("neorg").setup({
     },
 })
 require('telescope').setup()
+require('telescope').load_extension('fzf')
 require('nvim-autopairs').setup()
 require('bufferline').setup()
 
