@@ -1,6 +1,7 @@
 # nvim_config
 
-This is my Neovim configuration folder (found at `~/.config/nvim`). In order to get this to work, simply follow the below steps:
+This is my Neovim configuration folder (found at `~/.config/nvim`).
+In order to get this to work, simply follow the below steps on Neovim v0.12 or later:
 
 ## Installing Config
 
@@ -15,7 +16,5 @@ rm -rf ~/.config/nvim && git clone https://github.com/uptudev/nvim_config ~/.con
 ```powershell
 git clone https://github.com/uptudev/nvim_config $HOME/AppData/Local/nvim-data --depth 1
 ```
-
-Once loaded, run `:Lazy sync`.
 
 After that, restart Neovim, and you should see your new config!
